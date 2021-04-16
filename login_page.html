@@ -1,0 +1,28 @@
+<div>Identity Platform Quickstart</div>
+<div id="message">Loading...</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase.js"></script>
+<script>
+  var config = {
+    apiKey: "your-api-key", // get your api key from Application Setup Details in the Providers tab on the Identity Platform page
+    authDomain: "your-project-name.firebaseapp.com",
+  };
+  firebase.initializeApp(config);
+</script>
+
+<script>
+    var email = "test3@dummy.org";
+    var password = "testorg123";
+  
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        document.getElementById("message").innerHTML = "Welcome, " + user.email;
+      } else {
+        document.getElementById("message").innerHTML = "No user signed in.";
+      }
+    });
+  
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      document.getElementById("message").innerHTML = error.message;
+    });
+  </script>
